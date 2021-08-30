@@ -1,0 +1,5 @@
+﻿  Graph.cpp
+C:\Users\Jordan\Desktop\SwiftAg\SwiftAg\Graph.cpp(33,22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jordan\Desktop\SwiftAg\SwiftAg\Graph.cpp(37,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\Jordan\Desktop\SwiftAg\SwiftAg\Graph.cpp(41,25): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  SwiftAg.vcxproj -> C:\Users\Jordan\Desktop\SwiftAg\x64\Debug\SwiftAg.exe
