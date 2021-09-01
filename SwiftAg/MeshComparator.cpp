@@ -1,9 +1,9 @@
 #include "MeshComparator.hpp"
 #include "Graph.hpp"
 #include <unordered_map>
-#include <iostream>
 
 using namespace std;
+
 
 MeshComparator::MeshComparator(Graph* _g1, Graph* _g2) {
 	g1 = _g1;
@@ -33,40 +33,26 @@ void MeshComparator::calculateCutFill(double _stepResolution) {
 	for (double x = x_bound_min; x < x_bound_max; x += _stepResolution) {
 		for (double y = y_bound_min; y < y_bound_max; y += _stepResolution) {
 			Point* test_point = new Point(x, y, 0);
-			Triangle e_triangle;
-			Triangle p_triangle;
-			int num_g1_tris = 0;
-			int num_g2_tris = 0;
-			cout << boolalpha;
-			cout << "Test Point: " << test_point->get_x() << " " << test_point->get_y() << endl;
-			for (auto t1 : g1_tris) {
-				if (t1.first->pointInTriangle(test_point)) {
-					cout << "Point in G1 Triangle" << endl;
-					num_g1_tris += 1;
-					e_triangle = *t1.first;
-				}
-			}
-			for (auto t2 : g2_tris) {
-				if (t2.first->pointInTriangle(test_point)) {
-					cout << "Point in G2 Triangle" << endl;
-					num_g2_tris += 1;
-					p_triangle = *t2.first;
-				}
-			}
-			cout << "G1 Tris: " << num_g1_tris << endl;
-			cout << "G2 Tris: " << num_g2_tris << endl;
+			Triangle* e_triangle = nullptr;
+			Triangle* p_triangle = nullptr;
 
-			if (num_g1_tris == 1 && num_g2_tris == 1) {
-				double height_difference = e_triangle.getHeightAtPoint(test_point) - p_triangle.getHeightAtPoint(test_point);
+			if (g1->hasTriangleContainingPoint(test_point)) {
+				e_triangle = g1->getTriangleContainingPoint(test_point);
+			}
+			if (g2->hasTriangleContainingPoint(test_point)) {
+				p_triangle = g2->getTriangleContainingPoint(test_point);
+			}
+
+			if (!(e_triangle == nullptr) && !(p_triangle == nullptr)) {
+				double height_difference = e_triangle->getHeightAtPoint(test_point) - p_triangle->getHeightAtPoint(test_point);
 				if (height_difference > 0) {
-					cout << "Cut" << endl;
 					cut += (height_difference * pow(_stepResolution, 2));
 				}
 				if (height_difference < 0) {
-					cout << "Fill" << endl;
 					fill += (height_difference * pow(_stepResolution, 2));
 				}
 			}
+			delete test_point;
 		}
 	}
 }

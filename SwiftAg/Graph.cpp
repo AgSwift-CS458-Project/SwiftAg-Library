@@ -53,6 +53,23 @@ unordered_map<Triangle*, int> Graph::getTriangles() {
 	return triangles;
 }
 
+bool Graph::hasTriangleContainingPoint(Point* _p) {
+	for (auto t : triangles) {
+		if (t.first->pointInTriangle(_p)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+Triangle* Graph::getTriangleContainingPoint(Point* _p) {
+	for (auto t : triangles) {
+		if (t.first->pointInTriangle(_p)) {
+			return t.first;
+		}
+	}
+}
+
 bool Graph::delaunayTest(Triangle* _t) {
 	tuple<Point, double> cc = _t->circumcircle();
 	Point center = get<0>(cc);
@@ -103,9 +120,9 @@ void Graph::generateDelaunayTriangulation() {
 		}
 	}
 
-	//for (auto e : edgesToRemove) {
-	//	removeEdge(e);
-	//}
+	for (auto e : edgesToRemove) {
+		removeEdge(e);
+	}
 }
 
 void Graph::bowyerWatsonTriangulation() {

@@ -28,6 +28,8 @@ class Graph {
 		unordered_map<Point*, double> getPoints();
 		unordered_map<Edge*, bool> getEdges();
 		unordered_map<Triangle*, int> getTriangles();
+		bool hasTriangleContainingPoint(Point* _p);
+		Triangle* getTriangleContainingPoint(Point* _p);
 		bool delaunayTest(Triangle* _t);
 		void generateDelaunayTriangulation();
 		void bowyerWatsonTriangulation();

@@ -73,7 +73,7 @@ tuple<Point, double> Triangle::circumcircle() {
 }
 
 double Triangle::sign() {
-	return ((ab->get_a()->get_x() - ca->get_a()->get_x()) * (ab->get_b()->get_y() - ca->get_a()->get_y())) - ((ab->get_b()->get_x() - ca->get_a()->get_x()) * (ab->get_a()->get_y() - ca->get_a()->get_y()));
+	return (ab->get_a()->get_x() - ca->get_a()->get_x()) * (ab->get_b()->get_y() - ca->get_a()->get_y()) - (ab->get_b()->get_x() - ca->get_a()->get_x()) * (ab->get_a()->get_y() - ca->get_a()->get_y());
 }
 
 bool Triangle::pointInTriangle(Point* _p) {
@@ -88,7 +88,7 @@ bool Triangle::pointInTriangle(Point* _p) {
 	d2 = t2->sign();
 	d3 = t3->sign();
 
-	neg = (d1 > 0) || (d2 < 0) || (d3 < 0);
+	neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
 	pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
 
 	return !(neg && pos);
@@ -97,19 +97,13 @@ bool Triangle::pointInTriangle(Point* _p) {
 double Triangle::getHeightAtPoint(Point* _p) {
 	if (!pointInTriangle(_p)) return 0;
 	else {
-		vector<Edge*> edges = getEdges();
-		Edge* longest_edge = ab;
-		for (auto e : edges) {
-			if (e->length() > longest_edge->length()) {
-				longest_edge = e;
-			}
-		}
 
-		double d1 = (_p->distance(ab->get_a())) / longest_edge->length();
-		double d2 = (_p->distance(ab->get_b())) / longest_edge->length();
-		double d3 = (_p->distance(ca->get_a())) / longest_edge->length();
+		double d1 = _p->distance(ab->get_a());
+		double d2 = _p->distance(ab->get_b());
+		double d3 = _p->distance(ca->get_a());
+		double total_dist = d1 + d2 + d3;
 
-		double h = sqrt((d1 * ab->get_a()->get_height()) + (d2 * ab->get_b()->get_height()) + (d3 * ca->get_a()->get_height()));
+		double h = ((d1 / total_dist) * ab->get_a()->get_height()) + ((d2 / total_dist) * ab->get_b()->get_height()) + ((d3 / total_dist) * ca->get_a()->get_height());
 		return h;
 	}
 }
