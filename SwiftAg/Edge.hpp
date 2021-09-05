@@ -15,15 +15,16 @@ class Edge {
 		bool canDelete = true;
 	public:
 		Edge();
-		Edge(Point* _a, Point* _b);
+		Edge(Point& _a, Point& _b);
 		Point* get_a();
 		Point* get_b();
 		void setDelete(bool _d);
 		bool getDelete();
-		bool containsPoint(Point* _p);
+		bool containsPoint(Point& _p);
 		double length();
-		bool intersects(Edge* _e);
-		bool operator==(Edge* _e);
+		bool intersects(Edge& _e);
+		bool operator==(Edge& _e);
+		bool equals(Edge& _e);
 };
 
 #endif
