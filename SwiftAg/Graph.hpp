@@ -16,23 +16,23 @@ class Graph {
 		unordered_map<Triangle*, int> triangles;
 	public:
 		Graph();
-		void addPoint(Point* _p);
-		void addEdge(Edge* _e);
-		void addTriangle(Triangle* _t);
-		void removePoint(Point* _p);
-		void removeEdge(Edge* _e);
-		void removeTriangle(Triangle* _t);
+		void addPoint(Point& _p);
+		void addEdge(Edge& _e);
+		void addTriangle(Triangle& _t);
+		void removePoint(Point& _p);
+		void removeEdge(Edge& _e);
+		void removeTriangle(Triangle& _t);
 		int pointCount();
 		int edgeCount();
 		int triangleCount();
 		unordered_map<Point*, double> getPoints();
 		unordered_map<Edge*, bool> getEdges();
 		unordered_map<Triangle*, int> getTriangles();
-		bool hasTriangleContainingPoint(Point* _p);
-		Triangle* getTriangleContainingPoint(Point* _p);
-		bool delaunayTest(Triangle* _t);
+		bool hasTriangleContainingPoint(Point& _p);
+		Triangle* getTriangleContainingPoint(Point& _p);
+		bool delaunayTest(Triangle& _t);
 		void generateDelaunayTriangulation();
-		void bowyerWatsonTriangulation();
+		// void bowyerWatsonTriangulation();
 };
 
 #endif

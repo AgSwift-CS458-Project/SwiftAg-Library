@@ -18,8 +18,9 @@ class Point {
 		double get_x();
 		double get_y();
 		double get_height();
-		double distance(Point* _p);
-		bool operator==(Point* _p);
+		double distance(Point& _p);
+		bool operator==(Point& _p);
+		bool equals(Point& _p);
 };
 
 #endif

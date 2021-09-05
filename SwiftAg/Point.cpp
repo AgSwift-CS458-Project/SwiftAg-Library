@@ -27,11 +27,16 @@ double Point::get_height() {
 	return height;
 }
 
-double Point::distance(Point* _p) {
-	return sqrt(pow((_p->get_x() - x), 2) + pow((_p->get_y() - y), 2));
+double Point::distance(Point& _p) {
+	return sqrt(pow((_p.get_x() - x), 2) + pow((_p.get_y() - y), 2));
 }
 
-bool Point::operator==(Point* _p) {
-	if(x == _p->get_x() && y == _p->get_y()) return true;
+bool Point::operator==(Point& _p) {
+	if(x == _p.get_x() && y == _p.get_y()) return true;
+	else return false;
+}
+
+bool Point::equals(Point& _p) {
+	if (x == _p.get_x() && y == _p.get_y()) return true;
 	else return false;
 }

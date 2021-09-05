@@ -36,15 +36,15 @@ void MeshComparator::calculateCutFill(double _stepResolution) {
 			Triangle* e_triangle = nullptr;
 			Triangle* p_triangle = nullptr;
 
-			if (g1->hasTriangleContainingPoint(test_point)) {
-				e_triangle = g1->getTriangleContainingPoint(test_point);
+			if (g1->hasTriangleContainingPoint(*test_point)) {
+				e_triangle = g1->getTriangleContainingPoint(*test_point);
 			}
-			if (g2->hasTriangleContainingPoint(test_point)) {
-				p_triangle = g2->getTriangleContainingPoint(test_point);
+			if (g2->hasTriangleContainingPoint(*test_point)) {
+				p_triangle = g2->getTriangleContainingPoint(*test_point);
 			}
 
 			if (!(e_triangle == nullptr) && !(p_triangle == nullptr)) {
-				double height_difference = e_triangle->getHeightAtPoint(test_point) - p_triangle->getHeightAtPoint(test_point);
+				double height_difference = e_triangle->getHeightAtPoint(*test_point) - p_triangle->getHeightAtPoint(*test_point);
 				if (height_difference > 0) {
 					cut += (height_difference * pow(_stepResolution, 2));
 				}

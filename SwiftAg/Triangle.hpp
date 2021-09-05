@@ -10,23 +10,23 @@
 
 class Triangle {
 	private:
-		Edge* ab; 
-		Edge* bc;
-		Edge* ca;
+		Point* a; 
+		Point* b;
+		Point* c;
 	public:
-		Triangle();
-		Triangle(Point* _a, Point* _b, Point* _c);
-		bool operator==(Triangle* _t);
-		bool containsEdge(Edge* _e);
-		Edge& getEdge(int _index);
-		bool hasSharedEdge(Triangle* _t);
-		Edge& getSharedEdge(Triangle* _t);
-		vector<Edge*> getEdges();
+		Triangle(Point& _a, Point& _b, Point& _c);
+		bool operator==(Triangle& _t);
+		bool containsPoint(Point& _p);
+		// bool containsEdge(Edge& _e);
+		Edge* getEdge(int _index);
+		// bool hasSharedEdge(Triangle& _t);
+		// Edge* getSharedEdge(Triangle& _t);
+		vector<Point*> getPoints();
 		tuple<Point, double> circumcircle();
 		double sign();
 		//double area();
-		bool pointInTriangle(Point* _p);
-		double getHeightAtPoint(Point* _p);
+		bool pointInTriangle(Point& _p);
+		double getHeightAtPoint(Point& _p);
 };
 
 #endif
