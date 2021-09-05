@@ -17,10 +17,10 @@ class Triangle {
 		Triangle(Point& _a, Point& _b, Point& _c);
 		bool operator==(Triangle& _t);
 		bool containsPoint(Point& _p);
-		// bool containsEdge(Edge& _e);
+		bool containsEdge(Edge& _e);
 		Edge* getEdge(int _index);
-		// bool hasSharedEdge(Triangle& _t);
-		// Edge* getSharedEdge(Triangle& _t);
+		bool hasSharedEdge(Triangle& _t);
+		Edge* getSharedEdge(Triangle& _t);
 		vector<Point*> getPoints();
 		tuple<Point, double> circumcircle();
 		double sign();

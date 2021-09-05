@@ -53,7 +53,7 @@ int main(int argc, char* argv[]) {
 	cout << "Point 4 (5,5,1)" << endl;
 	cout << "Triangle 2 (Point 2, Point 3, Point 4)" << endl;
 	cout << "Point (2,2,0) inside Triangle 2: " << t2.pointInTriangle(tp) << endl;
-	// cout << "Triangle 1 and Triangle 2 share edges: " << t1.hasSharedEdge(t2) << endl;
+	cout << "Triangle 1 and Triangle 2 share edges: " << t1.hasSharedEdge(t2) << endl;
 	cout << endl;
 	cout << "Graph Tests: " << endl;
 	cout << "Graph 1: 25 random points" << endl;

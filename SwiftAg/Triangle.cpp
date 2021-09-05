@@ -21,10 +21,10 @@ bool Triangle::containsPoint(Point& _p) {
 	else return false;
 }
 
-//bool Triangle::containsEdge(Edge& _e) {
-//	if(*ab == _e || *bc == _e || *ca == _e) return true;
-//	else return false;
-//}
+bool Triangle::containsEdge(Edge& _e) {
+	if (containsPoint(*_e.get_a()) && containsPoint(*_e.get_b())) return true;
+	else return false;
+}
 
 Edge* Triangle::getEdge(int _index) {
 	switch (_index) {
@@ -37,16 +37,45 @@ Edge* Triangle::getEdge(int _index) {
 	}
 }
 
-//bool Triangle::hasSharedEdge(Triangle& _t) {
-//	t1_points = getPoints();
-//	t2_points = _t.getPoints();
-//}
-//
-//Edge* Triangle::getSharedEdge(Triangle& _t) {
-//	if (_t.containsEdge(*ab)) return *ab;
-//	else if (_t.containsEdge(*bc)) return *bc;
-//	else if (_t.containsEdge(*ca)) return *ca;
-//}
+bool Triangle::hasSharedEdge(Triangle& _t) {
+	vector<Point*> t1_points = getPoints();
+	vector<Point*> t2_points = _t.getPoints();
+	int counter = 0;
+	for (auto& t1 : t1_points) {
+		for (auto& t2 : t2_points) {
+			if (t1 == t2) {
+				counter += 1;
+			}
+		}
+	}
+	if (counter == 2) {
+		return true;
+	}
+	else return false;
+}
+
+Edge* Triangle::getSharedEdge(Triangle& _t) {
+	vector<Point*> t1_points = getPoints();
+	vector<Point*> t2_points = _t.getPoints();
+	bool a_set = false;
+	Point a;
+	Point b;
+	for (auto& t1 : t1_points) {
+		for (auto& t2 : t2_points) {
+			if (t1 == t2) {
+				if (a_set == false) {
+					a = *t1;
+					a_set = true;
+				}
+				else {
+					b = *t1;
+				}
+			}
+		}
+	}
+	return new Edge(a, b);
+
+}
 
 vector<Point*> Triangle::getPoints() {
 	return vector<Point*> {a, b, c};
