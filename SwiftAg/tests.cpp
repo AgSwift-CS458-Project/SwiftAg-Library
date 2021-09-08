@@ -67,8 +67,8 @@ int main(int argc, char* argv[]) {
 		cout << "X: " << p.first->get_x() << " Y: " << p.first->get_y() << endl;
 	}
 	cout << "Testing Bowyer-Watson Triangulation..." << endl;
-	g1.generateDelaunayTriangulation();
-	//g1.bowyerWatsonTriangulation();
+	//g1.generateDelaunayTriangulation();
+	g1.bowyerTriangulation();
 	ofstream ex_outfile;
 	ex_outfile.open("output.json");
 	ex_outfile << "[";

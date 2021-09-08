@@ -1,5 +1,6 @@
 #include "Graph.hpp"
 #include <tuple>
+#include <vector>
 
 Graph::Graph() {
 
@@ -84,17 +85,12 @@ bool Graph::delaunayTest(Triangle& _t) {
 }
 
 void Graph::generateDelaunayTriangulation() {
-	for (auto p1 : points) {
+	for (auto p1 : points ) {
 		for (auto p2 : points) {
 			for (auto p3 : points) {
 				if (!(p1.first == p2.first) && !(p2.first == p3.first) && !(p3.first == p1.first)) {
 					Triangle* test_tri = new Triangle(*p1.first, *p2.first, *p3.first);
-					if (delaunayTest(*test_tri)) {
-						addTriangle(*test_tri);
-					}
-					else {
-						delete test_tri;
-					}
+					(delaunayTest(*test_tri)) ? addTriangle(*test_tri) : delete test_tri;
 				}
 			}
 		}
@@ -128,6 +124,78 @@ void Graph::generateDelaunayTriangulation() {
 	for (auto e : edgesToRemove) {
 		removeEdge(*e);
 	}
+}
+
+//Riley's Attempt at bowyer triangulation
+
+
+Triangle Graph::bigTriangle(float _x, float _y) {
+	//Option 1: use point with the largest x, the one with largest y, and origin
+	//Option 2: Guess <- easier. TODO: do this better
+	//Convert to triangle constructor?
+	Point origin = Point(0, 0, 0);
+	Point bigX = Point(_x, 0, 0);
+	Point bigY = Point(0, _y, 0);
+
+	return Triangle(origin, bigX, bigY);
+}
+
+void Graph::bowyerTriangulation() {
+	
+	//Step 0: Setup
+	vector<Triangle> bad_triangles;
+	vector<Edge> polygon;
+	//clear for safety, likely unneccesary
+	triangles.clear();
+
+	//Step 1: make a big triangle
+	Triangle super_triangle = bigTriangle(999, 999);
+	addTriangle(super_triangle);
+
+	//Step 2: add all points and triangles
+	for (auto p: points) {
+		bad_triangles.clear();
+		for (auto t : triangles) {
+			Triangle tri = *t.first;
+			tuple<Point, double> circumcircle = tri.circumcircle();
+			if (get<0>(circumcircle).distance(*p.first) > get<1>(circumcircle)) {
+				bad_triangles.push_back(tri);
+			}
+		}
+		polygon.clear();
+		for (auto t : bad_triangles) {
+			//TODO: Reconsider storing edges in triangles. Possibly store edges and points to save runtime.
+			
+			Point a = *t.getPoints()[0];
+			Point b = *t.getPoints()[1];
+			Point c = *t.getPoints()[2];
+			Edge edge_a = Edge(a, b);
+			Edge edge_b = Edge(a, c);
+			Edge edge_c = Edge(b, c);
+			Edge bad_edges[3] = { edge_a, edge_b, edge_c };
+
+			//If an edge is in the polygon, remove it. Otherwise, add it.
+			//No one edge is shared by three triangles, no no edge will be added twice
+			for (auto bad_edge : bad_edges) {
+				if (find(polygon.begin(), polygon.end(), bad_edge) != polygon.end()) {
+					remove(polygon.begin(), polygon.end(), bad_edge);
+				}
+				else polygon.push_back(bad_edge);
+			}
+			//TODO: find a way to remove triangle with same value as t from triangles
+			//switching to Triangle objects likely best approach
+		}
+		for (auto edge : polygon) {
+			//May want to create in heap
+			Triangle newTri = Triangle(*edge.get_a(), *edge.get_b(), *p.first);
+			addTriangle(newTri);
+		}
+	}
+
+	//Step 3: Destroy Big Triangle
+	//TODO
+
+	return;
 }
 
 //void Graph::bowyerWatsonTriangulation() {

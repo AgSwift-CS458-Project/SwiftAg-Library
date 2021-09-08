@@ -1,11 +1,8 @@
 ﻿  Graph.cpp
-C:\Users\Jordan\Desktop\SwiftAg-Library\SwiftAg\Graph.cpp(33,22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Jordan\Desktop\SwiftAg-Library\SwiftAg\Graph.cpp(37,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-C:\Users\Jordan\Desktop\SwiftAg-Library\SwiftAg\Graph.cpp(41,25): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
-  MeshComparator.cpp
-  Triangle.cpp
+E:\Code\School Projects\AgSwift\SwiftAg\Graph.cpp(34,22): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+E:\Code\School Projects\AgSwift\SwiftAg\Graph.cpp(38,21): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+E:\Code\School Projects\AgSwift\SwiftAg\Graph.cpp(42,25): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
   tests.cpp
   Generating Code...
-C:\Users\Jordan\Desktop\SwiftAg-Library\SwiftAg\Triangle.cpp(38): warning C4715: 'Triangle::getEdge': not all control paths return a value
-C:\Users\Jordan\Desktop\SwiftAg-Library\SwiftAg\Graph.cpp(71): warning C4715: 'Graph::getTriangleContainingPoint': not all control paths return a value
-  SwiftAg.vcxproj -> C:\Users\Jordan\Desktop\SwiftAg-Library\x64\Debug\SwiftAg.exe
+E:\Code\School Projects\AgSwift\SwiftAg\Graph.cpp(72): warning C4715: 'Graph::getTriangleContainingPoint': not all control paths return a value
+  SwiftAg.vcxproj -> E:\Code\School Projects\AgSwift\x64\Debug\SwiftAg.exe

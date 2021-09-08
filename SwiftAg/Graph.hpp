@@ -11,6 +11,7 @@ using namespace std;
 
 class Graph {
 	private:
+		//TODO: switch all to objects not pointers
 		unordered_map<Point*, double> points;
 		unordered_map<Edge*, bool> edges;
 		unordered_map<Triangle*, int> triangles;
@@ -32,6 +33,8 @@ class Graph {
 		Triangle* getTriangleContainingPoint(Point& _p);
 		bool delaunayTest(Triangle& _t);
 		void generateDelaunayTriangulation();
+		void bowyerTriangulation();
+		Triangle bigTriangle(float _x, float _y);
 		// void bowyerWatsonTriangulation();
 };
 

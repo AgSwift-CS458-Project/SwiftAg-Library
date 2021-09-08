@@ -21,7 +21,7 @@ class MeshComparator {
 		double fill = 0;
 	public:
 		MeshComparator(Graph* _g1, Graph* _g2);
-		void calculateCutFill(double _stepResolution);
+		//void calculateCutFill(double _stepResolution);
 		double getCutAmount();
 		double getFillAmount();
 };

@@ -4,8 +4,7 @@
 using namespace std;
 
 Edge::Edge() {
-	a = new Point();
-	b = new Point();
+	
 }
 
 Edge::Edge(Point& _a, Point& _b) {
